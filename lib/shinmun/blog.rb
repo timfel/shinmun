@@ -7,7 +7,7 @@ module Shinmun
     attr_accessor :config
     attr_reader :posts, :pages, :posts_by_date, :posts_by_category, :posts_by_tag
 
-    %w[ base_path title description language author categories ].each do |name|
+    %w[ base_path title description language author categories base_url ].each do |name|
       define_method(name) { @config[name.to_sym] }
     end
 
@@ -96,7 +96,7 @@ module Shinmun
     end
 
     def url
-      "http://#{request.host}"
+      base_url || "http://#{request.host}"
     end
 
     def symbolize_keys(hash)      
